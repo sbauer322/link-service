@@ -1,5 +1,14 @@
 # cat-service
 
+Docker-ized Clojure microservice for supplying links from a curated collection of cat image links.
+
+Important features:
+
+* Supplies a map containing a link to a random cat image.
+* Simple API
+* When provided the correct token, allows updating of link collection.
+* Periodically attempts to access the curated links and removes dead ones.
+
 FIXME: description
 
 ## Installation
