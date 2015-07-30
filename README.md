@@ -1,41 +1,23 @@
-# cat-service
+# link-service
 
 Docker-ized Clojure microservice for supplying links from a curated collection of cat image links.
+FIXME
 
-Important features:
+## Prerequisites
 
 * Supplies a map containing a link to a random cat image.
 * Simple API
 * When provided the correct token, allows updating of link collection.
 * Periodically attempts to access the curated links and removes dead ones.
+You will need [Leiningen][] 2.0.0 or above installed.
 
-FIXME: description
+[leiningen]: https://github.com/technomancy/leiningen
 
-## Installation
+## Running
 
-Download from http://example.com/FIXME.
+To start a web server for the application, run:
 
-## Usage
-
-FIXME: explanation
-
-    $ java -jar cat-service-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+    lein ring server
 
 ## License
 
