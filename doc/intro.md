@@ -1,3 +1,3 @@
-# Introduction to cat-service
+# Introduction to link-service
 
 TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)
