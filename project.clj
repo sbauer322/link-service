@@ -36,4 +36,4 @@
                         [ring-mock "0.1.5"]]}}
 
   ;;; Repl
-  :repl-options {:init-ns link-service.db})
+  :repl-options {:init-ns link-service.handler})
