@@ -21,7 +21,7 @@ You will need [Leiningen][] 2.0.0 or above installed.
 
 To start a web server for the application, run:
 
-lein ring server
+'lein ring server'
 
 To access the contents returned from random, you can parse the body.
 
@@ -29,7 +29,7 @@ To access the contents returned from random, you can parse the body.
 
 By providing independent microservices there is a better separation of concerns. Should something break within one service, the others should still operate normally.
 
-This project was created to better provide random links of random things to random people. It was used to better understand certain libraries such as Ring, Compojure, and Korma. A secondary goal was to become familiar with Docker. Finally, it was made to support a Slack bot's need for quality cat gifs acquired throughout the Internet.
+This project was created to better provide random links of random things to random people. It was used to better understand certain libraries such as Ring, Compojure, and Korma. A secondary goal was to become familiar with Docker. More importantly, it was made to support a certain Slack bot's need for quality cat gifs acquired throughout the Internet.
 
 ## License
 
