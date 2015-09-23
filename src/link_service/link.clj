@@ -13,14 +13,7 @@
 (defn random-link
   "Returns a random link from the collection."
   ([]
-   (json/generate-string (random-link (rand-int (db/link-count)))))
-  ([n]
-   (if (> n 0)
-     (let [link  (first (db/get-link-index n))]
-       (if (nil? link)
-         (recur (rand-int (int (/ n 2))))
-         link))
-     (db/get-link-index 1))))
+   (json/generate-string (db/random-link))))
 
 (defn add-link
   "If the user-token is valid and the link is not already in the list then add the link to the list."

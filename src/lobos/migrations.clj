@@ -12,7 +12,7 @@
   (up [] (c/create
           (helpers/tbl :links
                        (s/integer :id :primary-key :auto-inc :unique)
-                       (s/varchar :link 100 :unique)
+                       (s/varchar :link 100 :unique :not-null)
                        (s/check :link (> (length :link) 1))
                        (s/boolean :dead)
                        (s/timestamp :created_on))))
