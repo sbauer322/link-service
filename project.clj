@@ -24,7 +24,13 @@
                  [lobos "1.0.0-beta3"] ;; For SQL database schema manipulation and migration... primarily handles create, alter, and drop.
                  ]
 
-  :plugins [[lein-ring "0.8.13"]]
+  :plugins [[codox "0.8.13"]
+            [lein-ring "0.8.13"]]
+
+  :codox {:defaults {:doc "FIXME: write docs"
+                     :doc/format :markdown}
+          :output-dir "doc"}
+
   :ring {:handler link-service.handler/app}
 
   ;;; Entry Point
