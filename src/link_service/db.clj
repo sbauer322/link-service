@@ -27,6 +27,13 @@
 
 ;;;; Database API
 
+(defn random-link
+  "Return a single random link from the links table.
+
+  This may turn out to be inefficient for large tables, but it is good enough for now."
+  []
+  (exec-raw ["SELECT \"links\".* FROM \"links\" ORDER BY RAND() LIMIT 1"] :results))
+
 (defn link-count
   "Provides an up-to-date count of how many links are in the link table."
   []
@@ -38,7 +45,8 @@
     (:count (first cnt) 0)))
 
 (defn get-user-token
-  "Returns the user token if a match is found. Otherwise, returns nil. Will throw an exception if the requested token is not at least one character long."
+  "Returns the user token if a match is found. Otherwise, returns nil.
+  Will throw an exception if the requested token is not at least one character long."
   [token]
   (first (select user-tokens
                  (where {:user-token token}))))
