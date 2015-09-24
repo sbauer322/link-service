@@ -25,6 +25,16 @@ To start a web server for the application, run:
 
 To access the contents returned from random, you can parse the body.
 
+## Development Notes
+
+To run tests:
+
+'lein test'
+
+To run the repl:
+
+'lein repl'
+
 ## Motivation
 
 By providing independent microservices there is a better separation of concerns. Should something break within one service, the others should still operate normally.
