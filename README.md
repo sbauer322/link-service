@@ -21,38 +21,32 @@ You will need [Leiningen][] 2.0.0 or above installed.
 
 ## Usage
 
-To start a web server for the application, run:
-
-'lein ring server'
+To start a web server for the application, run `lein ring server`.
 
 To access the content returned from /random, you can parse the body. It should just be a JSON map like the following example:
 
-'
+```
 {
 "link": "https://github.com/ring-clojure/ring"
 }
-'
+```
 
 To add content, you can use /add and send a POST with a JSON body as follows:
 
-'
+```
 {
 "link": "https://github.com/ring-clojure/ring",
 "token": "adsvsx41432ad$sf45a6s"
 }
-'
+```
 
 Sending an invalid token will result in the link not being added.
 
 ## Development Notes
 
-To run tests:
+To run tests: `lein test`
 
-'lein test'
-
-To run the repl:
-
-'lein repl'
+To run the repl: `lein repl`
 
 ## How is this different that what is already around?
 
