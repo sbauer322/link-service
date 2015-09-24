@@ -1,14 +1,11 @@
 (ns link-service.link
-  (:require [cheshire.core :as json]
+  (:require [taoensso.timbre :as timbre :refer (log  trace  debug  info  warn  error  fatal  report spy)]
+            [cheshire.core :as json]
             [link-service.db :as db]))
 
 (def user-tokens
   ; For debugging. To be removed in the future.
   ["sbauer"])
-
-(def links
-  ; For debugging. To be removed in the future.
-  ["http://29.media.tumblr.com/tumblr_lsvcpxVBgd1qzgqodo1_500.jpg"])
 
 (defn valid-token?
   [token]
@@ -24,13 +21,14 @@
 (defn random-link
   "Returns a random link from the collection."
   ([]
-   (json/generate-string (db/random-link))))
+   (select-keys (into {} (db/random-link)) [:link])))
 
 (defn add-link
   "If the user-token is valid and the link is not already in the list then add the link to the list."
   [user-token new-link]
   (if (valid-token? user-token)
     (do
+      (debug "Adding " new-link " to the database.")
       (db/add-link new-link)
       (add-link-success new-link)
       )
@@ -41,8 +39,7 @@
   [user-token link]
   (if (valid-token? user-token)
     (do
-      (json/generate-string (db/get-link link))
+      (debug "Returning " link " from the database.")
+      (db/get-link link)
       )
     invalid-token))
-
-
