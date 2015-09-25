@@ -3,13 +3,14 @@
             [cheshire.core :as json]
             [link-service.db :as db]))
 
-(def user-tokens
+(def tokens
   ; For debugging. To be removed in the future.
   ["sbauer"])
 
 (defn valid-token?
   [token]
-  (some #(= % token) user-tokens))
+  (debug "Validating token: " token)
+  (some #(= % token) tokens))
 
 (def invalid-token
   "Invalid token!")
@@ -24,22 +25,22 @@
    (select-keys (into {} (db/random-link)) [:link])))
 
 (defn add-link
-  "If the user-token is valid and the link is not already in the list then add the link to the list."
-  [user-token new-link]
-  (if (valid-token? user-token)
+  "If the token is valid and the link is not already in the list then add the link to the list."
+  [token new-link]
+  (if (valid-token? token)
     (do
-      (debug "Adding " new-link " to the database.")
-      (db/add-link new-link)
-      (add-link-success new-link)
-      )
+      (let [result (db/add-link new-link)]
+        (if (nil? result)
+          "Failed to add link."
+          (add-link-success new-link))))
     invalid-token))
 
 (defn get-link
   "Returns a json string of the link retreived from the database or an error string."
-  [user-token link]
-  (if (valid-token? user-token)
+  [token link]
+  (if (valid-token? token)
     (do
-      (debug "Returning " link " from the database.")
+      (debug "Returning link: " link)
       (db/get-link link)
       )
     invalid-token))

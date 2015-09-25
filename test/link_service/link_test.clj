@@ -5,11 +5,11 @@
 
 (deftest add-link-test
   (with-redefs [db/add-link (fn [link] 1)
-                user-tokens ["user"]]
+                tokens ["user"]]
     (is (= (add-link "user" "foo") (add-link-success "foo")))))
 
 (deftest get-link-test
   (with-redefs [db/get-link (fn [link] link)
-                user-tokens ["user"]]
-    (is (= (get-link "user" "foo") "\"foo\""))
+                tokens ["user"]]
+    (is (= (get-link "user" "foo") "foo"))
     (is (= (get-link "not-user" "foo") invalid-token))))
