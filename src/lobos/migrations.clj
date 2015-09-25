@@ -18,7 +18,7 @@
                        (s/timestamp :created_on))))
   (down [] (c/drop (s/table :links))))
 
-(defmigration add-token-table
+(defmigration add-tokens-table
   (up [] (c/create
           (helpers/tbl :tokens
                        (s/integer :id :primary-key :auto-inc :unique)
