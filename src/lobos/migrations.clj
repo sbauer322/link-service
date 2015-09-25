@@ -18,19 +18,13 @@
                        (s/timestamp :created_on))))
   (down [] (c/drop (s/table :links))))
 
-(defmigration add-counts-table
+(defmigration add-token-table
   (up [] (c/create
-          (helpers/tbl :counts
-                       (s/integer :count))))
-  (down [] (c/drop (s/table :counts))))
-
-(defmigration add-user-token-table
-  (up [] (c/create
-          (helpers/tbl :user-tokens
+          (helpers/tbl :tokens
                        (s/integer :id :primary-key :auto-inc :unique)
-                       (s/varchar :user-token 100 :unique :not-null)
-                       (s/check :user-token (> (length :user-token) 1)))))
-  (down [] (c/drop (s/table :user-tokens))))
+                       (s/varchar :token 255 :unique :not-null)
+                       (s/check :token (> (length :token) 1)))))
+  (down [] (c/drop (s/table :tokens))))
 
 ;;;; Examples from lobos README
 ;(defmigration add-users-table

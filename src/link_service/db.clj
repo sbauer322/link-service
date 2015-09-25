@@ -1,5 +1,6 @@
 (ns link-service.db
-  (:require [korma.db :refer :all]
+  (:require [taoensso.timbre :as timbre :refer (log  trace  debug  info  warn  error  fatal  report spy)]
+            [korma.db :refer :all]
             [korma.core :refer :all]
             [lobos.config :as config]
             [lobos.core :refer [migrate]]))
@@ -25,39 +26,7 @@
   (pk :id)
   (entity-fields :id :user-token))
 
-;;;; Database API
-
-(defn random-link
-  "Return a single random link from the links table.
-
-  This may turn out to be inefficient for large tables, but it is good enough for now."
-  []
-  (exec-raw ["SELECT \"links\".* FROM \"links\" ORDER BY RAND() LIMIT 1"] :results))
-
-(defn link-count
-  "Provides an up-to-date count of how many links are in the link table."
-  []
-  (let [cnt (select counts
-                    (where {:id 1}))]
-    (when (empty? cnt)
-      (insert counts
-              (values {:id 1 :count 0})))
-    (:count (first cnt) 0)))
-
-(defn get-user-token
-  "Returns the user token if a match is found. Otherwise, returns nil.
-  Will throw an exception if the requested token is not at least one character long."
-  [token]
-  (first (select user-tokens
-                 (where {:user-token token}))))
-
-(defn add-user-token
-  "Adds the token if it is valid and not already in the table."
-  [token]
-  (let [before (get-user-token token)]
-    (when (nil? before)
-      (insert user-tokens
-              (values {:user-token token})))))
+;;;; Retreive from database
 
 (defn get-link
   [link]
@@ -70,16 +39,60 @@
   (first (select links
                  (where {:id i}))))
 
+(defn get-token
+  "Returns the token if a match is found. Otherwise, returns nil.
+  Will throw an exception if the requested token is not at least one character long."
+  [token]
+  (first (select user-tokens
+                 (where {:user-token token}))))
+
+(defn random-link
+  "Return a single random link from the links table.
+
+  This may turn out to be inefficient for large tables, but it is good enough for now."
+  []
+  (exec-raw ["SELECT \"links\".* FROM \"links\" ORDER BY RAND() LIMIT 1"] :results))
+
+;;;; Utility
+
+(defn valid-new-input?
+  "Confirms a link or token to be added to the database is acceptable.
+
+  In particular:
+  * Not empty
+  * Not nil
+  * Not already in the database"
+  [input table-fn]
+  (if (not (or (nil? input) (empty? input)))
+    (let [before (table-fn input)]
+      (if (nil? before)
+        true
+        false))
+    false))
+
+;;;; Add to database
+
 (defn add-link
   "Add the link if it is valid and not already in the table."
   [link]
-  (let [before (get-link link)]
-    (when (nil? before)
+  (if (valid-new-input? link get-link)
+    (do
+      (debug "Adding link: " link)
       (insert links
-              (values {:link link :dead false}))
-      (update counts ; Increment link count.
-              (set-fields {:count (inc (link-count))})
-              (where {:id 1})))))
+              (values {:link link :dead false})))
+    nil))
+
+(defn add-token
+  "Adds the token if it is valid and not already in the table."
+  [token]
+  (if (valid-new-input? token get-token)
+    (do
+      (debug "Adding token: " token)
+      (insert user-tokens
+              (values {:user-token token})))
+    nil))
+
+;;;; Remove from database
 
 (defn remove-link
   "Remove the link if it is valid and can be found in the table."

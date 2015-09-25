@@ -4,14 +4,14 @@
             [link-service.handler :refer :all]
             [link-service.db :as db]))
 
-(deftest test-app
+(deftest app-test
   (testing "random"
-    (with-redefs [db/random-link (fn [] "foo")]
+    (with-redefs [db/random-link (fn [] {:link "foo"})]
       (let [response (app (mock/request :get "/random"))]
         (is (= (:status response) 200))
-        (is (= (:body response) "\"foo\"")))))
+        (is (= (:body response) "{\"link\":\"foo\"}")))))
 
-  (testing "main route"
+  (testing "default route"
     (let [response (app (mock/request :get "/"))]
       (is (= (:status response) 404))
       (is (= (:body response) "Not Found"))))

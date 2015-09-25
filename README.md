@@ -40,7 +40,11 @@ To add content, you can use /add and send a POST with a JSON body as follows:
 }
 ```
 
+Make sure the Content-Type of your header is correct. It should be `application/json`.
+
 Sending an invalid token will result in the link not being added.
+
+The maximum link lenght is 255 characters.
 
 ## Development Notes
 

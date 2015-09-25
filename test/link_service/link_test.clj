@@ -11,5 +11,5 @@
 (deftest get-link-test
   (with-redefs [db/get-link (fn [link] link)
                 user-tokens ["user"]]
-    (is (= (get-link "user" "foo") "\"foo\""))
+    (is (= (get-link "user" "foo") "foo"))
     (is (= (get-link "not-user" "foo") invalid-token))))
