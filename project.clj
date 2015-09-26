@@ -15,10 +15,12 @@
   ;;; Dependencies, Plugins, and Repositories
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [com.taoensso/timbre "4.0.2"] ;; Logging
+                 [environ "1.0.0"] ;; Manages environment settings
                  [compojure "1.3.1"]
                  [ring/ring-core "1.4.0"]
                  [ring/ring-defaults "0.1.2"]
                  [ring/ring-json "0.4.0"]
+                 [ring/ring-mock "0.3.0"]
                  [cheshire "5.5.0"] ;; Handles JSON
                  [org.clojure/java.jdbc "0.3.7"] ;; For Korma
                  [korma "0.4.0"] ;; DSL for RMDB
@@ -27,10 +29,10 @@
                  ]
 
   :plugins [[codox "0.8.13"]
+            [lein-environ "1.0.0"]
             [lein-ring "0.8.13"]]
 
-  :codox {:defaults {:doc "FIXME: write docs"
-                     :doc/format :markdown}
+  :codox {:defaults {:doc/format :markdown}
           :output-dir "doc"}
 
   :ring {:handler link-service.handler/app}
