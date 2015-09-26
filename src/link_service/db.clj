@@ -18,14 +18,6 @@
   (pk :id) ; Short for primary key, the line is unnecessary in this example.
   (entity-fields :id :link :dead :created_on))
 
-(defentity counts
-  (pk :id)
-  (entity-fields :id :count))
-
-(defentity user-tokens
-  (pk :id)
-  (entity-fields :id :user-token))
-
 ;;;; Retreive from database
 
 (defn get-link
@@ -39,13 +31,6 @@
   (first (select links
                  (where {:id i}))))
 
-(defn get-token
-  "Returns the token if a match is found. Otherwise, returns nil.
-  Will throw an exception if the requested token is not at least one character long."
-  [token]
-  (first (select user-tokens
-                 (where {:user-token token}))))
-
 (defn random-link
   "Return a single random link from the links table.
 
@@ -56,7 +41,7 @@
 ;;;; Utility
 
 (defn valid-new-input?
-  "Confirms a link or token to be added to the database is acceptable.
+  "Confirms a link to be added to the database is acceptable.
 
   In particular:
   * Not empty
@@ -80,16 +65,6 @@
       (debug "Adding link: " link)
       (insert links
               (values {:link link :dead false})))
-    nil))
-
-(defn add-token
-  "Adds the token if it is valid and not already in the table."
-  [token]
-  (if (valid-new-input? token get-token)
-    (do
-      (debug "Adding token: " token)
-      (insert user-tokens
-              (values {:user-token token})))
     nil))
 
 ;;;; Remove from database

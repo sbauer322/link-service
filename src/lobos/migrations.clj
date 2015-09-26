@@ -12,19 +12,11 @@
   (up [] (c/create
           (helpers/tbl :links
                        (s/integer :id :primary-key :auto-inc :unique)
-                       (s/varchar :link 100 :unique :not-null)
+                       (s/varchar :link 255 :unique :not-null)
                        (s/check :link (> (length :link) 1))
                        (s/boolean :dead)
                        (s/timestamp :created_on))))
   (down [] (c/drop (s/table :links))))
-
-(defmigration add-tokens-table
-  (up [] (c/create
-          (helpers/tbl :tokens
-                       (s/integer :id :primary-key :auto-inc :unique)
-                       (s/varchar :token 255 :unique :not-null)
-                       (s/check :token (> (length :token) 1)))))
-  (down [] (c/drop (s/table :tokens))))
 
 ;;;; Examples from lobos README
 ;(defmigration add-users-table

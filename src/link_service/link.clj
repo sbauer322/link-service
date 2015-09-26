@@ -1,13 +1,14 @@
 (ns link-service.link
   (:require [taoensso.timbre :as timbre :refer (log  trace  debug  info  warn  error  fatal  report spy)]
             [cheshire.core :as json]
+            [environ.core :refer [env]]
             [link-service.db :as db]))
 
 (def tokens
-  ; For debugging. To be removed in the future.
-  ["sbauer"])
+  (env :tokens))
 
 (defn valid-token?
+  "Returns true if token is valid. Otherwise nil."
   [token]
   (debug "Validating token: " token)
   (some #(= % token) tokens))
