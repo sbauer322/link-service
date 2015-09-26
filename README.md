@@ -50,6 +50,8 @@ The maximum link lenght is 255 characters.
 
 To run tests: `lein test`
 
+To run documentation generation: `lein doc`
+
 To run the repl: `lein repl`
 
 ## How is this different that what is already around?
