@@ -44,7 +44,9 @@ Make sure the Content-Type of your header is correct. It should be `application/
 
 Sending an invalid token will result in the link not being added.
 
-The maximum link lenght is 255 characters.
+The maximum link length is 255 characters.
+
+Be sure to populate your profiles.clj as it contains various config info, such as the database user and password as well as tokens.
 
 ## Development Notes
 
