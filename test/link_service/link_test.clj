@@ -15,9 +15,9 @@
 
 (deftest add-link-test
   (with-redefs [db/add-link (fn [link] 1)]
-    (is (= (add-link "user" "foo") (add-link-success "foo")))))
+    (is (= (add-link "user" "foo") {:success? true, :message "Added link: foo"}))))
 
 (deftest get-link-test
-  (with-redefs [db/get-link (fn [link] link)]
-    (is (= (get-link "user" "foo") "foo"))
-    (is (= (get-link "not-user" "foo") invalid-token))))
+  (with-redefs [db/get-link (fn [link] {:link link})]
+    (is (= (get-link "user" "foo") {:link "foo"}))
+    (is (= (get-link "not-user" "foo") {:success? false, :message "Invalid token!"}))))
