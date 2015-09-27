@@ -3,7 +3,9 @@
             [korma.db :refer :all]
             [korma.core :refer :all]
             [lobos.config :as config]
-            [lobos.core :refer [migrate]]))
+            [lobos.core :refer [migrate]]
+            [clj-time.core :as t]
+            [clj-time.format :as f]))
 
 (do
   (migrate)
@@ -55,6 +57,8 @@
         false))
     false))
 
+(def format-time (f/formatters :mysql))
+
 ;;;; Add to database
 
 (defn add-link
@@ -64,7 +68,7 @@
     (do
       (debug "Adding link: " link)
       (insert links
-              (values {:link link :dead false})))
+              (values {:link link :dead false :created_on (f/unparse format-time (t/now))})))
     nil))
 
 ;;;; Remove from database

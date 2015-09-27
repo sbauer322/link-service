@@ -26,7 +26,7 @@
                  [korma "0.4.0"] ;; DSL for RMDB
                  [com.h2database/h2 "1.3.170"] ;; JDBC driver for H2
                  [lobos "1.0.0-beta3"] ;; For SQL database schema manipulation and migration... primarily handles create, alter, and drop.
-                 ]
+                 [clj-time "0.11.0"]]
 
   :plugins [[codox "0.8.13"]
             [lein-environ "1.0.0"]
