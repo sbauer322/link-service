@@ -20,10 +20,14 @@
   [link]
   {:success? true :message (str "Added link: " link)})
 
+(defn get-link-success
+  [m]
+  (select-keys (into {} m) [:link]))
+
 (defn random-link
   "Returns a random link from the collection."
   ([]
-   (select-keys (into {} (db/random-link)) [:link])))
+   (get-link-success (db/random-link))))
 
 (defn add-link
   "If the token is valid and the link is not already in the list then add the link to the list."
@@ -42,6 +46,6 @@
   (if (valid-token? token)
     (do
       (debug "Returning link: " link)
-      (db/get-link link)
+      (get-link-success (db/get-link link))
       )
     invalid-token))
