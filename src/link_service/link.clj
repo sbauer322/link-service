@@ -14,11 +14,11 @@
   (some #(= % token) tokens))
 
 (def invalid-token
-  "Invalid token!")
+  {:success? false :message "Invalid token!"})
 
 (defn add-link-success
   [link]
-  (str "Successfully added the following link to the service: " link))
+  {:success? true :message (str "Added link: " link)})
 
 (defn random-link
   "Returns a random link from the collection."
