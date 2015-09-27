@@ -1,4 +1,4 @@
-# link-service
+# link-service [![Build Status](https://semaphoreci.com/api/v1/projects/f7bf986f-77d2-496a-9356-695a30319e96/552518/badge.svg)](https://semaphoreci.com/sbauer322/link-service)
 
 Dockerized Clojure microservice for supplying image links from a curated collection.
 
