@@ -2,10 +2,14 @@
   (:require [taoensso.timbre :as timbre :refer (log  trace  debug  info  warn  error  fatal  report spy)]
             [cheshire.core :as json]
             [environ.core :refer [env]]
+            [clojure.string :as s]
             [link-service.db :as db]))
 
 (def tokens
-  (env :tokens))
+  (let [tkns (env :tokens)]
+    (if (coll? tkns)
+      tkns
+      (s/split tkns #","))))
 
 (defn valid-token?
   "Returns true if token is valid. Otherwise nil."
