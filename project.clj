@@ -41,12 +41,11 @@
   :main link-service.handler
 
   ;;; Profiles
-  :profiles {:dev-common {:dependencies [[javax.servlet/servlet-api "2.5"]
-                                         [ring-mock "0.3.0"]]}
+  :profiles {:dev-common {:dependencies [[javax.servlet/servlet-api "2.5"]]}
              :dev-overrides {}
              :dev [:dev-common :dev-overrides]
 
-             :test-common {:dependencies [[ring-mock "0.3.0"]]}
+             :test-common {:dependencies [[ring/ring-mock "0.3.0"]]}
              :test-overrides {}
              :test [:test-common :test-overrides]
 
