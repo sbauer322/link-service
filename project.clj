@@ -41,9 +41,19 @@
   :main link-service.handler
 
   ;;; Profiles
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring-mock "0.1.5"]]}}
+  :profiles {:dev-common {:dependencies [[javax.servlet/servlet-api "2.5"]
+                                         [ring-mock "0.3.0"]]}
+             :dev-overrides {}
+             :dev [:dev-common :dev-overrides]
+
+             :test-common {:dependencies [[ring-mock "0.3.0"]]}
+             :test-overrides {}
+             :test [:test-common :test-overrides]
+
+             :uberjar-common {:omit-source true
+                              :aot :all}
+             :uberjar-overrides {}
+             :uberjar [:uberjar-common :uberjar-overrides]}
 
   ;;; Repl
   :repl-options {:init-ns link-service.handler})

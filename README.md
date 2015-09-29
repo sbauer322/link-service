@@ -36,7 +36,7 @@ To add content, you can use /add and send a POST with a JSON body as follows:
 ```
 {
 "link": "https://github.com/ring-clojure/ring",
-"token": "adsvsx41432ad$sf45a6s"
+"token": "d89b060e"
 }
 ```
 
@@ -46,7 +46,12 @@ Sending an invalid token will result in the link not being added.
 
 The maximum link length is 255 characters.
 
-Be sure to populate your profiles.clj as it contains various config info, such as the database user and password as well as tokens.
+To run the uberjar:
+
+```java -Ddb.user=sa -Ddb.password=3335b2f3f27cf3ee91f8797d034843ed6682e4974a9aa5bca6146bd70737887e -Dtokens=d89b060e -jar link-service-0.1.0-SNAPSHOT-standalone.jar```
+
+-Dtokens should have a comma in between each acceptable token and no spaces.
+
 
 ## Development Notes
 
@@ -55,6 +60,24 @@ To run tests: `lein test`
 To run documentation generation: `lein doc`
 
 To run the repl: `lein repl`
+
+To run for dev: `lein ring server-headless` port 3000
+
+To package the uberjar: `lein ring uberjar`
+
+Be sure to populate your profiles.clj as it contains various config info, such as the database user and password as well as tokens. You'll want to mimic the following, but with better passwords and tokens:
+
+```
+{:dev-overrides  {:env {:db-user        "sa"
+:db-password    "password"
+:tokens         ["aaaaaaaa"]}}
+:test-overrides {:env {:db-user        "sa"
+:db-password    "password"
+:tokens         ["bbbbbbbb"]}}
+:uberjar-overrides {:env {:db-user     "sa"
+:db-password    "password"
+:tokens         ["cccccccc"]}}}
+```
 
 ## How is this different that what is already around?
 

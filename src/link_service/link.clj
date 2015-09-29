@@ -14,7 +14,7 @@
 (defn valid-token?
   "Returns true if token is valid. Otherwise nil."
   [token]
-  (debug "Validating token: " token)
+  (info "Validating token: " token " against tokens: " tokens)
   (some #(= % token) tokens))
 
 (def invalid-token
