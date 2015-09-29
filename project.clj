@@ -20,7 +20,7 @@
                  [ring/ring-core "1.4.0"]
                  [ring/ring-defaults "0.1.2"]
                  [ring/ring-json "0.4.0"]
-                 [ring/ring-mock "0.3.0"]
+                 [http-kit "2.1.19"]
                  [cheshire "5.5.0"] ;; Handles JSON
                  [org.clojure/java.jdbc "0.3.7"] ;; For Korma
                  [korma "0.4.0"] ;; DSL for RMDB

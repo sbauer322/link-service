@@ -1,6 +1,5 @@
 (ns lobos.config
   (:require [clojure.string :as string]
-            [lobos.connectivity :as conn]
             [environ.core :refer [env]]))
 
 (def db
@@ -13,5 +12,3 @@
    :naming {:keys string/lower-case
             ;; set map keys to lower
             :fields string/lower-case}})
-
-(conn/open-global db)
