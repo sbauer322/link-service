@@ -34,7 +34,7 @@
    (get-link-response (db/random-link))))
 
 (defn add-link
-  "If the token is valid and the link is not already in the list then add the link to the list."
+  "If the token is valid and the link is not already in the list then add the link to the list. Otherwise returns nil."
   [token new-link]
   (if (valid-token? token)
     (do
@@ -45,7 +45,7 @@
     invalid-token))
 
 (defn get-link
-  "Returns a json string of the link retreived from the database or an error string."
+  "Returns a JSON string of the link retreived from the database or an error string. If the link is not found then an empty JSON string is returned."
   [token link]
   (if (valid-token? token)
     (do
@@ -53,3 +53,17 @@
       (get-link-response (db/get-link link))
       )
     invalid-token))
+
+(defn delete-link
+  ""
+  [token link]
+  (if (valid-token? token)
+    (do
+      (db/delete-link link)
+      (let [result (get-link token link)]
+        (if-not (empty? result)
+          (add-link-response false (str "Failed to delete link: " link))
+          (add-link-response true (str "Deleted link: " link)))))
+    invalid-token))
+
+
