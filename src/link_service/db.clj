@@ -29,6 +29,7 @@
 ;;;; Retreive from database
 
 (defn get-link
+  "Returns the link, or nil if not found. If there are multiple links returned only the first is returned as the result."
   [link]
   (first (select links
                  (where {:link link}))))
@@ -77,10 +78,10 @@
               (values {:link link :dead false :created_on (f/unparse format-time (t/now))})))
     nil))
 
-;;;; Remove from database
+;;;; Delete from database
 
-(defn remove-link
-  "Remove the link if it is valid and can be found in the table."
+(defn delete-link
+  "Delete the link if it is valid and can be found in the table. Returns nil regardless if the link was in the table or not."
   [link]
   (let [before (get-link link)]
     (when-not (nil? before)

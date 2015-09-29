@@ -13,7 +13,7 @@
           (helpers/tbl :links
                        (s/integer :id :primary-key :auto-inc :unique)
                        (s/varchar :link 255 :unique :not-null)
-                       (s/check :link (> (length :link) 1))
+                       (s/check :link (> (length :link) 0))
                        (s/boolean :dead)
                        (s/timestamp :created_on))))
   (down [] (c/drop (s/table :links))))

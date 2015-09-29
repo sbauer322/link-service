@@ -16,6 +16,9 @@
   (POST "/add" {body :body} (let [token (:token body)
                                   link (:link body)]
                               (response (link/add-link token link))))
+  (POST "/delete" {body :body} (let [token (:token body)
+                                     link (:link body)]
+                                 (response (link/delete-link token link))))
   (route/resources "/")
   (route/not-found "Not Found"))
 

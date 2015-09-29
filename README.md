@@ -40,6 +40,8 @@ To add content, you can use /add and send a POST with a JSON body as follows:
 }
 ```
 
+Deleting works the same way but with the endpoint /delete.
+
 Make sure the Content-Type of your header is correct. It should be `application/json`.
 
 Sending an invalid token will result in the link not being added.
