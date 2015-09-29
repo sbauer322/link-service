@@ -9,15 +9,15 @@
   (testing "nil"
     (is (= (valid-token? nil) nil)))
   (testing "not valid"
-    (is (= (valid-token? "richard") nil)))
+    (is (= (valid-token? "not-user") nil)))
   (testing "valid"
-    (is (= (valid-token? "user") true))))
+    (is (= (valid-token? "10f27b0f") true))))
 
 (deftest add-link-test
   (with-redefs [db/add-link (fn [link] 1)]
-    (is (= (add-link "user" "foo") {:success? true, :message "Added link: foo"}))))
+    (is (= (add-link "10f27b0f" "foo") {:success? true, :message "Added link: foo"}))))
 
 (deftest get-link-test
   (with-redefs [db/get-link (fn [link] {:link link})]
-    (is (= (get-link "user" "foo") {:link "foo"}))
+    (is (= (get-link "10f27b0f" "foo") {:link "foo"}))
     (is (= (get-link "not-user" "foo") {:success? false, :message "Invalid token!"}))))

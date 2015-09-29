@@ -3,12 +3,18 @@
             [korma.db :refer :all]
             [korma.core :refer :all]
             [lobos.config :as config]
+            [lobos.connectivity :as conn]
             [lobos.core :refer [migrate]]
             [clj-time.core :as t]
             [clj-time.format :as f]))
 
-(do
-  (migrate)
+(defn init
+  "Initializes the database and opens the connection."
+  []
+  (conn/open-global config/db)
+  ; We do the following binding because the migrations won't execute in an uberjar. See http://stackoverflow.com/a/15331451/3141194
+  (binding [lobos.migration/*reload-migrations* false]
+    (migrate))
   )
 
 ;; Pass the connection map to the defdb macro:

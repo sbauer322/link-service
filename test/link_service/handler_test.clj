@@ -27,7 +27,7 @@
                            (mock/content-type
                             (mock/request :post "/add")
                             "application/json")
-                           "{\"link\": \"https://github.com/\", \"token\": \"user\"}"))]
+                           "{\"link\": \"https://github.com/\", \"token\": \"10f27b0f\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":true,\"message\":\"Added link: https://github.com/\"}")))))
 
