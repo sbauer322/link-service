@@ -19,7 +19,7 @@
 
 (deftest get-link-test
   (with-redefs [db/get-link (fn [link] {:link link})]
-    (is (= (get-link "10f27b0f" "foo") {:link "foo"}))
+    (is (= (get-link "10f27b0f" "foo") {:success? true, :message "foo"}))
     (is (= (get-link "not-user" "foo") {:success? false, :message "Invalid token!"}))))
 
 (deftest delete-link-test

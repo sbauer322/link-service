@@ -45,7 +45,7 @@
 
   This may turn out to be inefficient for large tables, but it is good enough for now."
   []
-  (exec-raw ["SELECT \"links\".* FROM \"links\" ORDER BY RAND() LIMIT 1"] :results))
+  (first (exec-raw ["SELECT \"links\".* FROM \"links\" ORDER BY RAND() LIMIT 1"] :results)))
 
 ;;;; Utility
 

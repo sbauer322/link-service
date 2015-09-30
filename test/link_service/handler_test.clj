@@ -9,7 +9,7 @@
     (with-redefs [db/random-link (fn [] {:link "foo"})]
       (let [response (app (mock/request :get "/random"))]
         (is (= (:status response) 200))
-        (is (= (:body response) "{\"link\":\"foo\"}")))))
+        (is (= (:body response) "{\"success?\":true,\"message\":\"foo\"}")))))
 
   (testing "add link - bad token"
     (with-redefs [db/add-link (fn [_] {:link "foo"})]
