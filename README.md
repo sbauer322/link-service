@@ -50,7 +50,7 @@ Note that `-Dtokens` should have a comma in between each token with no spaces.
 
 ### Repl
 
-Clone the project and in the project's directory run `lein repl` from the command line followed by `(-main)`. Make sure you add a `profiles.clj` file as described [below](Profiles.clj) in Development Notes.
+Clone the project and in the project's directory run `lein repl` from the command line followed by `(-main)`. Make sure you add a `profiles.clj` file as described below in Development Notes.
 
 ## API
 
