@@ -3,6 +3,7 @@
             [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
+            [environ.core :refer [env]]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.util.response :refer [response]]
@@ -14,10 +15,10 @@
 (defroutes app-routes
   (GET "/random" [] (response (link/random-link)))
   (POST "/add" {body :body} (let [token (:token body)
-                                  link (:link body)]
+                                  link (:message body)]
                               (response (link/add-link token link))))
   (POST "/delete" {body :body} (let [token (:token body)
-                                     link (:link body)]
+                                     link (:message body)]
                                  (response (link/delete-link token link))))
   (route/resources "/")
   (route/not-found "Not Found"))
@@ -32,9 +33,25 @@
   []
   (db/init))
 
+(defonce server (atom nil))
+
+(defn stop-server
+  "Stop the server gracefully."
+  []
+  (when-not (nil? @server)
+    ;; graceful shutdown: wait 100ms for existing requests to be finished
+    ;; :timeout is optional, when no timeout, stop immediately
+    (@server :timeout 100)
+    (reset! server nil)
+    (debug "Server stopped.")))
+
 (defn -main
   "Starts the server, ensuring that the database has been properly
-  initialized. Starts on port 8090."
+  initialized. Server defaults to ip 0.0.0.0 and port 7999 if not specified."
   [& args]
   (init)
-  (run-server app {}))
+  (let [ip (or (env :ip) "0.0.0.0")
+        port (or (bigdec (env :port)) 7999)]
+    (reset! server (run-server app {:ip ip
+                                    :port port}))
+    (debug "Server started at: " ip ":" port)))
