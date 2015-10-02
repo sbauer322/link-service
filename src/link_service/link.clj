@@ -1,6 +1,5 @@
 (ns link-service.link
   (:require [taoensso.timbre :as timbre :refer (log  trace  debug  info  warn  error  fatal  report spy)]
-            [cheshire.core :as json]
             [environ.core :refer [env]]
             [clojure.string :as s]
             [link-service.db :as db]))

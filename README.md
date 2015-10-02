@@ -69,7 +69,7 @@ To access the content returned from `/random`, you can parse the body. It should
 
 ```json
 {
-"link": "https://github.com/ring-clojure/ring"
+"message": "https://github.com/ring-clojure/ring"
 }
 ```
 
@@ -77,10 +77,12 @@ To add content, you can use `/add` and send a POST with a JSON body as follows:
 
 ```json
 {
-"link": "https://github.com/ring-clojure/ring",
+"message": "https://github.com/ring-clojure/ring",
 "token": "d89b060e"
 }
 ```
+
+The keys used are `"message": string`, `"token": string`, `"success?": boolean`.
 
 Deleting content works the same way as `/add` but with the endpoint `/delete`.
 
@@ -106,18 +108,24 @@ To package the uberjar: `lein uberjar`
 
 ### Profiles.clj
 
-Be sure to create and populate a file named `profiles.clj` at the root of the project directory. This file should contain various config info, such as the database user and password as well as tokens. You'll want to mimic the following, but with better passwords and tokens:
+Be sure to create and populate a file named `profiles.clj` at the root of the project directory. This file should contain various config info, such as the database user and password as well as tokens. The only required entry is the `:tokens`. You'll want to mimic the following, but with better passwords and tokens:
 
 ```
-{:dev-overrides  {:env {:db-user        "sa"
+{:dev-overrides  {:env {:ip             "0.0.0.0"
+                        :port           7999
+                        :db-user        "sa"
                         :db-password    "password1"
                         :tokens         ["aaaaaaaa"]}}
- :test-overrides {:env {:db-user        "sa"
+ :test-overrides {:env {:ip             "0.0.0.0"
+                        :port           7999
+                        :db-user        "sa"
                         :db-password    "password1"
                         :tokens         ["bbbbbbbb"]}}
- :uberjar-overrides {:env {:db-user     "sa"
-                           :db-password    "password1"
-                           :tokens         ["cccccccc"]}}}
+ :uberjar-overrides {:env {:ip          "0.0.0.0"
+                           :port        7999
+                           :db-user     "sa"
+                           :db-password "password1"
+                           :tokens      ["cccccccc"]}}}
 ```
 
 ### Unimplmented Features

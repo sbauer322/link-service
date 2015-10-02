@@ -17,7 +17,7 @@
                            (mock/content-type
                             (mock/request :post "/add")
                             "application/json")
-                           "{\"link\": \"https://agithusb.com/ring-csdflojure/ring\", \"token\": \"nonuser\"}"))]
+                           "{\"message\": \"https://agithusb.com/ring-csdflojure/ring\", \"token\": \"nonuser\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":false,\"message\":\"Invalid token!\"}")))))
 
@@ -27,7 +27,7 @@
                            (mock/content-type
                             (mock/request :post "/add")
                             "application/json")
-                           "{\"link\": \"\", \"token\": \"10f27b0f\"}"))]
+                           "{\"message\": \"\", \"token\": \"10f27b0f\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":false,\"message\":\"Failed to add link: \"}")))))
 
@@ -37,7 +37,7 @@
                            (mock/content-type
                             (mock/request :post "/add")
                             "application/json")
-                           "{\"link\": \"https://github.com/\", \"token\": \"10f27b0f\"}"))]
+                           "{\"message\": \"https://github.com/\", \"token\": \"10f27b0f\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":true,\"message\":\"Added link: https://github.com/\"}")))))
 
@@ -48,7 +48,7 @@
                            (mock/content-type
                             (mock/request :post "/delete")
                             "application/json")
-                           "{\"link\": \"https://github.com/\", \"token\": \"nonuser\"}"))]
+                           "{\"message\": \"https://github.com/\", \"token\": \"nonuser\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":false,\"message\":\"Invalid token!\"}")))))
 
@@ -59,7 +59,7 @@
                            (mock/content-type
                             (mock/request :post "/delete")
                             "application/json")
-                           "{\"link\": \"\", \"token\": \"10f27b0f\"}"))]
+                           "{\"message\": \"\", \"token\": \"10f27b0f\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":true,\"message\":\"Deleted link: \"}")))))
 
@@ -70,7 +70,7 @@
                            (mock/content-type
                             (mock/request :post "/delete")
                             "application/json")
-                           "{\"link\": \"https://github.com/\", \"token\": \"10f27b0f\"}"))]
+                           "{\"message\": \"https://github.com/\", \"token\": \"10f27b0f\"}"))]
         (is (= (:status response) 200))
         (is (= (:body response) "{\"success?\":true,\"message\":\"Deleted link: https://github.com/\"}")))))
 
