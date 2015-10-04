@@ -1,4 +1,4 @@
-# link-service [![Build Status](https://semaphoreci.com/api/v1/projects/f7bf986f-77d2-496a-9356-695a30319e96/552518/badge.svg)](https://semaphoreci.com/sbauer322/link-service)
+# link-service [![Build Status](https://semaphoreci.com/api/v1/projects/21a4b211-6883-4f85-a9e6-3ec0f42132ec/559650/badge.svg)](https://semaphoreci.com/sbauer322/link-service-2)
 
 A microservice, written in Clojure, for providing a random link from a curated collection. Technically, it does not have to be a link, just a short string (i.e., less than 256 characters). Access is in the form of HTML-based JSON and responses are returned in the same manner.
 
