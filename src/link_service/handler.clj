@@ -47,11 +47,11 @@
 
 (defn -main
   "Starts the server, ensuring that the database has been properly
-  initialized. Server defaults to ip 0.0.0.0 and port 7999 if not specified."
+  initialized. Server defaults to ip 0.0.0.0 and port 8090 if not specified."
   [& args]
   (init)
   (let [ip (or (env :ip) "0.0.0.0")
-        port (or (bigdec (env :port)) 7999)]
+        port (or (bigdec (env :port)) 8090)]
     (reset! server (run-server app {:ip ip
                                     :port port}))
     (debug "Server started at: " ip ":" port)))

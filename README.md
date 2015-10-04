@@ -45,6 +45,8 @@ java -Ddb.user=sa -Ddb.password=password1 -Dtokens=d89b060e,8sd1a2xb -jar link-s
 | -Ddb.user      | sa            |     y     |sa             |
 | -Ddb.password  | password1     |     y     |               |
 | -Dtokens       | d89b060e      |     n     |<i>required</i>|
+| -Dip           | 192.168.1.252 |     y     |0.0.0.0        |
+| -Dport         | 7999          |     y     |8090           |
 
 Note that `-Dtokens` should have a comma in between each token with no spaces.
 
@@ -112,17 +114,17 @@ Be sure to create and populate a file named `profiles.clj` at the root of the pr
 
 ```
 {:dev-overrides  {:env {:ip             "0.0.0.0"
-                        :port           7999
+                        :port           8090
                         :db-user        "sa"
                         :db-password    "password1"
                         :tokens         ["aaaaaaaa"]}}
  :test-overrides {:env {:ip             "0.0.0.0"
-                        :port           7999
+                        :port           8090
                         :db-user        "sa"
                         :db-password    "password1"
                         :tokens         ["bbbbbbbb"]}}
  :uberjar-overrides {:env {:ip          "0.0.0.0"
-                           :port        7999
+                           :port        8090
                            :db-user     "sa"
                            :db-password "password1"
                            :tokens      ["cccccccc"]}}}
