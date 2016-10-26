@@ -1,10 +1,10 @@
 # link-service [![Build Status](https://semaphoreci.com/api/v1/projects/21a4b211-6883-4f85-a9e6-3ec0f42132ec/559650/badge.svg)](https://semaphoreci.com/sbauer322/link-service-2)
 
-A microservice, written in Clojure, for providing a random link from a curated collection. Technically, it does not have to be a link, just a short string (i.e., less than 256 characters). Access is in the form of HTML-based JSON and responses are returned in the same manner.
+A microservice for providing a random link from a curated collection, written in Clojure. Technically, it does not have to be a link, just an arbitrarily short string (i.e., less than 256 characters). Access is in the form of HTML-based JSON and responses are returned in the same manner.
 
 ## Main Features
 
-* Simple API - JSON response containing a "message" and "success?" field.
+* Simple API - JSON response containing "message" and "success?" fields.
 * Allows updating of link collection by adding or deleting links.
 
 ## Why is this cool?
@@ -32,7 +32,7 @@ There are a couple of different ways to use this service.
 
 ### Uberjar
 
-Simple uberjar that is ready to deploy. All you need to do is provide the properties on launch. All properties except for `-Dtokens` have defaults and can be omitted. For instance:
+A simple uberjar that is ready to deploy might be the fastest way to test out link-service. All you need to do is provide some properties on launch. All properties except for `-Dtokens` have defaults and can be omitted. For instance:
 
 ```
 java -Ddb.user=sa -Ddb.password=password1 -Dtokens=d89b060e,8sd1a2xb -jar link-service-0.1.0-SNAPSHOT-standalone.jar
@@ -94,8 +94,6 @@ The maximum link length is 255 characters.
 
 ## Motivation
 
-By providing independent microservices there is a better separation of concerns. Should something break within one service, the others should still operate normally.
-
 This project was created to better provide random links of random things to random people. It was used to better understand certain libraries such as Ring, Compojure, and Korma. A secondary goal was to become familiar with Docker. More importantly, it was made to support a certain Slack bot's need for quality cat gifs acquired throughout the Internet.
 
 ## Development Notes
@@ -134,15 +132,16 @@ Be sure to create and populate a file named `profiles.clj` at the root of the pr
 
 * Tagging links so results can be returned based on tags.
 * Dead link checking - periodically attempts to access the curated links and removes dead ones.
-* Runs in Docker.
+* Security features
+* Export/dump link collection
 
 ## Parting Notes
 
-If you plan to use this project (or judge my skills) please keep in mind it was developed as a tool for learning in my spare time and may have bugs, major design flaws, or other issues. That said, feel free to submit issues, pull requests, or questions. I would be happy to assist.
+If you plan to use this project, please keep in mind it was developed for my amuzement in my spare time and may have bugs, major design flaws, or other issues. That said, feel free to submit issues, pull requests, or questions. I am happy to assist.
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Scott Bauer
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
